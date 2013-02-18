@@ -18,12 +18,17 @@ And then execute:
 
 ## Usage
   
-  Добавляем config/sape.yml, в котором
-    user_id: номер в сапе
+Добавляем config/sape.yml, в котором
 
-  В шаблоне: 
-    sape_links(кол-во ссылок)
+  user_id: номер в сапе
 
+В шаблоне
+  
+  <%= sape_links(кол-во ссылок) =>
+
+Последний вызов (или единственный), должен быть
+
+  <%= sape_links() =>
 
 ## Contributing
 

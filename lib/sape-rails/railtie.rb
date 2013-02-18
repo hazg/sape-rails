@@ -7,7 +7,6 @@ module Sape
     end
 
     def load_config
-      #binding.pry
       @config = YAML.load_file(Rails.root.join('config/sape.yml'))
     end
 
