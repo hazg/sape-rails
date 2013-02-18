@@ -28,7 +28,7 @@ And then execute:
 
 Последний вызов (или единственный), должен быть
 
-  <%= sape_links() =>
+    <%= sape_links() =>
 
 ## Contributing
 
