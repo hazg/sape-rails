@@ -1,12 +1,11 @@
 # sape-rails
 
 Вывод ссылок сапы в rails приложениях.
-Оригинал: http://forum.searchengines.ru/showthread.php?t=237277
 
-Работает в rails 3.2
+>= rails 3.2
 
 
-## Installation
+## Установка
 
 Add this line to your application's Gemfile:
 
@@ -16,7 +15,7 @@ And then execute:
 
     $ bundle
 
-## Usage
+## Использование
   
 Добавляем config/sape.yml, в котором
 
@@ -29,6 +28,19 @@ And then execute:
 Последний вызов (или единственный), должен быть
 
     <%= sape_links() =>
+
+## Опции
+
+config/sape.yml
+
+    user_id: номер в сапе
+    host: Хост, где показываем ссылки
+    server: Откуда берем ссылки. По умолчанию 'dispencer-01.sape.ru'
+    timeout: Время между обновлениями links.db, по умолчанию: 3600
+
+C ошибками - велкам в issues
+
+Оригинал: http://forum.searchengines.ru/showthread.php?t=237277
 
 ## Contributing
 
