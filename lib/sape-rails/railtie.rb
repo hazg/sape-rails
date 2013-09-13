@@ -7,12 +7,13 @@ module Sape
     end
 
     def load_config
-      @config = YAML.load_file(Rails.root.join('config/sape.yml'))
+      @config = YAML.load_file(Rails.root.join('config/sape.yml')).symbolize_keys
     end
+    
 
-    def config( val )
-      @config[val.to_s]
-    end
+    #def config( val )
+    #  @config[val.to_s]
+    #end
 
   end
 end

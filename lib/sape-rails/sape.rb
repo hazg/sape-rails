@@ -1,4 +1,4 @@
-require 'net/http'
+require 'open-uri'
 
 # Originally by: Dmitry Root (droot@deeptown.org)
 # http://forum.searchengines.ru/showthread.php?t=237277
@@ -8,14 +8,14 @@ module Sape
   class Processor
 
     @@default_options = {
-      :force_show_code => true,
+      :force_show_code => false,
       :charset => 'utf-8',
       :server => 'dispencer-01.sape.ru',
       :timeout => 60 * 60 * 1             # use nil if you don't want to get updates
                                           # In this case, you have to call update()
                                           # manually in the cron job, for ex.
     }
-
+    
     attr_reader :options
 
     class InvalidArguments < Exception
@@ -77,7 +77,7 @@ module Sape
         begin
           fetch_links
         rescue Exception => e
-          @sape_error = "<!-- SAPE.ru error: #{e.message} -->"
+          @sape_error = "<!-- error: #{e.message} -->"
           return @sape_error
         end
       end
@@ -88,14 +88,14 @@ module Sape
     def update
       file = File.new(@options[:filename], 'a+')
       if file.flock(File::LOCK_EX | File::LOCK_NB)
-        resp = fetch("http://#{@options[:server]}" +
+        content = fetch("http://#{@options[:server]}" +
                      "/code.php?user=#{@options[:user]}&" +
                      "host=#{@options[:host]}&" +
                      "as_txt=true&" +
                      "charset=#{@options[:charset]}&" +
                      "no_slash_fix=true")
-        raise RequestError.new("request error '#{resp.message}'") unless resp.is_a? Net::HTTPSuccess
-        content = resp.body
+        
+        
         all_links = parse_links(content)
         raise ContentError.new("no '__sape_new_url__' in links text") unless all_links['__sape_new_url__']
         file.seek(0)
@@ -110,12 +110,15 @@ module Sape
   private
 
     def fetch(url, limit = 10)
-      raise RequestError.new('HTTP redirect too deep') if limit == 0
 
-      resp = Net::HTTP.get_response(URI.parse(url))
-      return fetch(resp['location'], limit-1) if resp.is_a? Net::HTTPRedirection
+      begin
+        resp = open(url)
+      rescue Exception => e
+        raise RequestError.new("request error '#{e.message}'")
+      end
+      
+      resp.read()
 
-      resp
     end
 
     # load links from cache and update them if needed
