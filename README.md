@@ -16,26 +16,27 @@ And then execute:
 ## Использование
   
 Добавляем config/sape.yml, в котором
-
-    user_id: номер в сапе
+```yml
+user_id: номер в сапе
+```
 
 В шаблоне
-  
-    <%= sape_links(кол-во ссылок) =>
-
+```erb  
+<%= sape_links(кол-во ссылок) %>
+```
 Последний вызов (или единственный), должен быть
-
-    <%= sape_links() =>
-
+```erb  
+<%= sape_links() %>
+```
 ## Опции
 
 config/sape.yml
-
-    user_id: номер в сапе
-    host: Хост, где показываем ссылки
-    server: Откуда берем ссылки. По умолчанию 'dispencer-01.sape.ru'
-    timeout: Время между обновлениями links.db, по умолчанию: 3600
-
+```yml
+user_id: номер в сапе
+host: Хост, где показываем ссылки
+server: Откуда берем ссылки. По умолчанию 'dispencer-01.sape.ru'
+timeout: Время между обновлениями links.db, по умолчанию: 3600
+```
 C ошибками - велкам в issues
 
 Оригинал: http://forum.searchengines.ru/showthread.php?t=237277
