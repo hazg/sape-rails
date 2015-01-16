@@ -10,7 +10,7 @@ module Sape
     @@default_options = {
       :force_show_code => false,
       :charset => 'utf-8',
-      :server => 'dispencer-01.sape.ru',
+      :server => 'dispenser-01.sape.ru',
       :timeout => 60 * 60 * 1             # use nil if you don't want to get updates
                                           # In this case, you have to call update()
                                           # manually in the cron job, for ex.
